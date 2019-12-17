@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\Area;
+use App\Models\ExamRoom;
 use App\Models\ExamShift;
 use App\Models\Module;
 use App\Models\Room;
@@ -27,7 +28,9 @@ class HomeController extends Controller
         $examCount = Exam::count();
         $areaCount = Area::count();
         $examShiftCount = ExamShift::count();
-      return view('home',compact('teacherCount','studentCount','roomCount','universityCount','moduleCount','examCount','areaCount','examShiftCount'));
+        $examRoomCount = ExamRoom::count();
+      return view('home',compact('teacherCount','studentCount','roomCount','universityCount',
+          'moduleCount','examCount','areaCount','examShiftCount','examRoomCount'));
     }
 
     //Check existing login account

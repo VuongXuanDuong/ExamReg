@@ -11,7 +11,8 @@ class ExamShiftController extends Controller
 {
     public function index()
     {
-        $examShifts = ExamShift::orderBy('id', 'DESC')->paginate(20);
+        $examShifts = ExamShift::with('module')->with('exam')
+            ->orderBy('id', 'DESC')->paginate(20);
         $exams = Exam::orderBy('id', 'DESC')->paginate(20);
         $modules = Module::orderBy('id', 'DESC')->paginate(20);
         return view('examShift.index', compact('examShifts', 'exams', 'modules'));

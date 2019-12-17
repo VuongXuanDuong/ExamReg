@@ -90,4 +90,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/','ExamShiftController@index');
     });
     Route::resource('exam-shift','ExamShiftController');
+
+    // Exam Room
+    Route::group(['prefix' => 'exam-room'], function () {
+        Route::get('/','ExamRoomController@index');
+    });
+    Route::resource('exam-room','ExamRoomController');
 });

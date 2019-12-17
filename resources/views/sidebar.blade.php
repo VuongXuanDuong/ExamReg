@@ -54,6 +54,10 @@
                         <a href="{{asset('admin/exam-shift')}}"><i class="far fa-address-card"></i>Ca Thi<span
                                     class="arrow"></span></a>
                     </li>
+                    <li data-toggle="collapse" data-target="#examRoom" class="collapsed">
+                        <a href="{{asset('admin/exam-room')}}"><i class="far fa-address-card"></i>Phòng Thi<span
+                                    class="arrow"></span></a>
+                    </li>
 
                     <li data-toggle="collapse" data-target="#teacher" class="collapsed">
                         <a href="#"><i class="fas fa-chalkboard-teacher"></i> Tài khoản giảng viên <span

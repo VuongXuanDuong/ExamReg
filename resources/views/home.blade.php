@@ -162,6 +162,24 @@
             <a href="{{asset('admin/exam-shift')}}">  Xem thêm</a>
         </div>
     </div>
+    <div class="panel">
+        <div class="panel-header" style="background-color:#ff9400;">
+            <div class="number">
+                {{$examRoomCount}}
+            </div>
+            <div class="icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="text">
+                Phòng thi
+                <br>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a href="{{asset('admin/exam-room')}}">  Xem thêm</a>
+        </div>
+    </div>
 
     </div>
 
