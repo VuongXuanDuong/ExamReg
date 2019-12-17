@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-9">
             <h1 class="title">
-                List Exam
+                List Exam Shift
                 <button class="btn btn-success" data-toggle="modal" data-target="#insertModal"><i
                             class="fa fa-plus"></i></button>
             </h1>
@@ -12,26 +12,33 @@
         <div class="col-md-3">
         </div>
     </div>
-    {{--    List exam --}}
+    {{--    List exam area --}}
     <table class="table">
         <thead>
 
         <th>STT</th>
-        <th>Name</th>
+        <th>Mã môn học</th>
+        <th>Môn học</th>
+        <th>Kỳ thi</th>
+        <th>Day</th>
         <th>Time Start</th>
         <th>Time Finish</th>
+        <th>Tools</th>
 
 
         </thead>
         <tbody>
-        @foreach($exams as $index =>  $exam )
+        @foreach($examShifts as $index =>  $examShift )
             <tr>
                 <td>{{$index+1}}</td>
-                <td>{{$exam['name']}}</td>
-                <td>{{$exam['time_start']}}</td>
-                <td>{{$exam['time_finish']}}</td>
+                <td>{{$examShift['module']->code}}</td>
+                <td>{{$examShift['module']->name}}</td>
+                <td>{{$examShift['exam']->name}}</td>
+                <td>{{$examShift['day']}}</td>
+                <td>{{$examShift['time_start']}}</td>
+                <td>{{$examShift['time_finish']}}</td>
                 <td>
-                    <div class="btn-group" exam_id={{$exam['id']}} exam_info="{{$exam}}">
+                    <div class="btn-group" examShift_id={{$examShift['id']}} examShift_info="{{$examShift}}">
                         {{-- Edit button --}}
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"
                                 onclick="setValueEditForm(this)">
@@ -39,13 +46,13 @@
                         </button>
 
                         {{-- Show button --}}
-                        <button type="submit" class="btn btn-success" onclick="showExamInfo(this);"><i
+                        <button type="submit" class="btn btn-success" onclick="showExamShiftInfo(this);"><i
                                     class="fa fa-eye"></i></button>
 
                         {{--  --}}
 
                         {{-- Delete button --}}
-                        <form method="post" action="{{ url('/admin/exam/'.$exam->id) }}">
+                        <form method="post" action="{{ url('/admin/exam-shift/'.$examShift->id) }}">
                             @csrf
                             {!! method_field('delete') !!}
                             <button type="submit" class="btn btn-danger"
@@ -61,79 +68,104 @@
         </tbody>
     </table>
 
-    {{--    form edit exam--}}
+{{--    form edit--}}
     <div class="modal" id="editModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Exam</h4>
-
+                    <h4 class="modal-title">Edit Exam Shift</h4>
                 </div>
-
                 <!-- Modal body -->
-                <form id="formEdit" class="form-group" action="{{url('admin/exam')}}" method="post">
+                <form id="formEdit" class="form-group" action="{{url('admin/exam-shift')}}" method="post">
                     <div class="modal-body">
                         @csrf
                         {!! method_field('put') !!}
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="name" required
+                            <label>Môn học</label>
+                            <select name="module_id" class="form-control">
+                                @foreach ($modules as $index => $module)
+                                    <option value="{{ $module['id'] }}" {{ $module['id'] == $examShift['module_id'] ? 'selected' : '' }}> {{$module['code']}} - [{{ $module['name']}}]</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Kỳ thi</label>
+                            <select name="exam_id" class="form-control">
+                                @foreach ($exams as $index => $exam)
+                                    <option value="{{ $exam['id'] }}" {{ $exam['id'] == $examShift['exam_id'] ? 'selected' : '' }}> {{ $exam['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Day</label>
+                            <input type="date" class="form-control" name="day" required
                                    value="">
                         </div>
                         <div class="form-group">
                             <label for="">Time Start</label>
-                            <input type="date" class="form-control" name="time_start" required
+                            <input type="time" class="form-control" name="time_start" required
                                    value="">
                         </div>
                         <div class="form-group">
                             <label for="">Time Finish</label>
-                            <input type="date" class="form-control" name="time_finish" required
+                            <input type="time" class="form-control" name="time_finish" required
                                    value="">
                         </div>
                     </div>
-
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Sửa</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
-
+{{--    form insert--}}
     <div class="modal" id="insertModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Create Exam</h4>
-
                 </div>
-
                 <!-- Modal body -->
-                <form id="formInsert" class="form-group" action="{{url('admin/exam')}}" method="post">
+                <form id="formInsert" class="form-group" action="{{url('admin/exam-shift')}}" method="post">
                     <div class="modal-body">
                         @csrf
-
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="name"
-                                   placeholder="Enter name module" required value="">
+                            <label>Môn học</label>
+                            <select name="module_id" class="form-control">
+                                <option>-- --</option>
+                                @foreach ($modules as $index => $module)
+                                    <option value="{{ $module['id'] }}" }}> {{$module['code']}} - [{{ $module['name']}}]</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Time Start</label>
-                            <input type="date" class="form-control" name="time_start" placeholder="Enter date"
-                                   required value="">
+                            <label>Kỳ thi</label>
+                            <select name="exam_id" class="form-control">
+                                <option>-- --</option>
+                                @foreach ($exams as $index => $exam)
+                                    <option value="{{ $exam['id'] }}" }}> {{ $exam['name']}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Time Finish</label>
-                            <input type="date" class="form-control" name="time_finish" placeholder="Enter date"
-                                   required value="">
+                            <label for="">Day</label>
+                            <input type="date" class="form-control" name="day" required
+                                   value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Time Start</label>
+                            <input type="time" class="form-control" name="time_start" required
+                                   value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Time Finish</label>
+                            <input type="time" class="form-control" name="time_finish" required
+                                   value="">
                         </div>
                     </div>
 
@@ -169,36 +201,27 @@
                 showConfirmButton: false
             })
         }
-    </script>
-    <script type="text/javascript">
-
         function setValueEditForm(elem) {
-            let info = JSON.parse(elem.parentNode.getAttribute('exam_info'));
-            $('#formEdit').attr('action', window.location.origin + '/admin/exam/' + info.id);
-            $('#formEdit input[name = name]').val(info.name);
+            let info = JSON.parse(elem.parentNode.getAttribute('examShift_info'));
+            $('#formEdit').attr('action', window.location.origin + '/admin/exam-shift/' + info.id);
+            $('#formEdit select[name = module_id]').val(info.module_id);
+            $('#formEdit select[name = exam_id]').val(info.exam_id);
+            $('#formEdit input[name = day]').val(info.day);
             $('#formEdit input[name = time_start]').val(info.time_start);
             $('#formEdit input[name = time_finish]').val(info.time_finish);
-        }
 
-        function showExamInfo(elem) {
-            let info = JSON.parse(elem.parentNode.getAttribute('exam_info'));
+        }
+        function showExamShiftInfo(elem) {
+            let info = JSON.parse(elem.parentNode.getAttribute('examShift_info'));
             swal({
-                title: "University",
+                title: "Exam Shift",
                 confirmButtonText: 'Thoát',
                 html:
                     `
                  <table class="table" style="text-align:left;">
                     <tr>
-                        <th>Name  </th>
-                        <td>${info.name}</td>
-                    </tr>
-                    <tr>
-                        <th>Time Start  </th>
-                        <td>${info.time_start}</td>
-                    </tr>
-                    <tr>
-                        <th> Time Finish </th>
-                        <td>${info.time_finish}</td>
+                        <th>Do Something </th>
+                        <td>${info.day}</td>
                     </tr>
                      <tr>
                         <th>Time create  </th>

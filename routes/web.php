@@ -84,4 +84,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
        Route::get('/','ExamAreaController@index');
     });
     Route::resource('exam-area','ExamAreaController');
+
+    // Exam Shift
+    Route::group(['prefix' => 'exam-shift'], function () {
+        Route::get('/','ExamShiftController@index');
+    });
+    Route::resource('exam-shift','ExamShiftController');
 });
