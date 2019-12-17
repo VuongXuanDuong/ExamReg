@@ -46,8 +46,12 @@
                         <a href="{{asset('admin/exam')}}"><i class="far fa-address-card"></i>Kỳ thi<span
                                     class="arrow"></span></a>
                     </li>
-                    <li data-toggle="collapse" data-target="#exam" class="collapsed">
+                    <li data-toggle="collapse" data-target="#examArea" class="collapsed">
                         <a href="{{asset('admin/exam-area')}}"><i class="far fa-address-card"></i>Khu vực thi<span
+                                    class="arrow"></span></a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#examShift" class="collapsed">
+                        <a href="{{asset('admin/exam-shift')}}"><i class="far fa-address-card"></i>Ca Thi<span
                                     class="arrow"></span></a>
                     </li>
 
