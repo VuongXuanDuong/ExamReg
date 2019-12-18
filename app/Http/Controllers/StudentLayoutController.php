@@ -52,12 +52,10 @@ class StudentLayoutController extends Controller
         Result::create([
           'course_id' => $request->course_id,
           'survey_id' => $request->survey_id,
-          'content' => $request->content,
           'student_account_id'=>$studentAccount['id']
         ]);
       }else{
         $result = Result::where(['course_id' => $request->course_id,'student_account_id' => $studentAccount['id']])->first();
-        $result -> content = $request->content;
         $result ->save();
       }
 

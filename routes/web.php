@@ -24,6 +24,8 @@ Route::post('/login', 'LoginController@authLogin')->name('login');
 Route::group(['prefix' => 'sinh-vien', 'middleware' => 'student'], function () {
     Route::get('/', 'StudentLayoutController@index')->name('studentHome');
     Route::get('me', 'StudentLayoutController@me');
+    Route::get('change','StudentLayoutController@changePass');
+    Route::get('changePass','StudentLayoutController@postChangePass');
 
 });
 // Teacher

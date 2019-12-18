@@ -19,7 +19,7 @@
   </style>
 
   <h2 class="title"> Đổi mật khẩu </h2>
-  <form id="form"  action="{{route('changePass')}}" method="post">
+  <form id="form"  action="{{url('changePass')}}" method="post">
     @csrf
     <div class="form-group">
       <label for="">Mật khẩu hiện tại</label>
