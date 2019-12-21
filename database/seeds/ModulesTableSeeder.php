@@ -13,24 +13,24 @@ class ModulesTableSeeder extends Seeder
     {
         DB::table('modules')->insert([
             'name' => 'Toán trong công nghệ',
-            'code' => 'ELT2029 1',
-            'subject_code' => 'ELT2029'
+            'code' => 'MAT2029 1',
+            'subject_code' => 'MAT2029'
         ]);
 
         DB::table('modules')->insert([
-            'name' => 'Toán trong công nghệ',
-            'code' => 'ELT2029 2',
-            'subject_code' => 'ELT2029'
+            'name' => 'Phát triển ứng dụng web',
+            'code' => 'DEVE221 2',
+            'subject_code' => 'DEVE221'
         ]);
 
         DB::table('modules')->insert([
-            'name' => 'Toán trong công nghệ',
-            'code' => 'ELT2029 3',
-            'subject_code' => 'ELT2029'
+            'name' => 'Lập trình hướng đối tượng',
+            'code' => 'OOP1121 3',
+            'subject_code' => 'OOP1121'
         ]);
 
         DB::table('modules')->insert([
-            'name' => 'Toán trong công nghệ',
+            'name' => 'Dự án',
             'code' => 'ELT2029 4',
             'subject_code' => 'ELT2029'
         ]);

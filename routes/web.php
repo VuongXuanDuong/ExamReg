@@ -72,6 +72,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     // Module
     Route::group(['prefix' => 'module'], function () {
         Route::get('/','ModuleController@index');
+        Route::get('/list-student/{id}','ModuleController@listStudent');
+        Route::post('/list-student/{id}','ModuleController@storeStudent');
+        Route::delete('/list-student/{id}','ModuleController@destroyStudent');
     });
     Route::resource('module','ModuleController');
 
