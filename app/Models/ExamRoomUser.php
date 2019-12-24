@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\ExamRoom;
 use App\StudentAccount;
 use Illuminate\Database\Eloquent\Model;
 
-class ModuleUser extends Model
+class ExamRoomUser extends Model
 {
     //
-    protected $fillable = ['module_id', 'user_id', 'status', 'exam_id'];
+    protected $fillable = ['exam_room_id', 'user_id'];
 
-    public function module()
+    public function exam_room()
     {
-        return $this->belongsTo(Module::class, 'module_id', 'id');
+        return $this->belongsTo(ExamRoom::class, 'exam_room_id', 'id');
     }
 
     public function user()

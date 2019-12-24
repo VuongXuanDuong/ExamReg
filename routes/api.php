@@ -17,5 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('check/{username}','HomeController@checkExistingAccount');
-Route::get('default-survey','HomeController@getDefaultSurveyContent');
+Route::get('/all-modules/{userId}', 'StudentLayoutController@getAllModules');
+Route::post('/register-exam-sessions', 'StudentLayoutController@registerExamSessions');
+
+Route::get('/all-module-registrated/{userId}','StudentLayoutController@registerExamShift');
+Route::delete('/unregister/{examRoomUserId}','StudentLayoutController@unRegisterAShift');

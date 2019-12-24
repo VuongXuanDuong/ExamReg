@@ -8,8 +8,10 @@ use App\Models\Area;
 class Room extends Model
 {
     //
-    protected $fillable = ['name', 'total_computer','area_id'];
-    public function area() {
+    protected $fillable = ['name', 'total_computer', 'area_id'];
+
+    public function area()
+    {
         return $this->belongsTo(Area::class);
     }
 }

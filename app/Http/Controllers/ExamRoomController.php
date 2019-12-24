@@ -12,7 +12,7 @@ class ExamRoomController extends Controller
 {
     public function index()
     {
-        $examRooms = ExamRoom::with('examShift.module')->with('room.area')
+        $examRooms = ExamRoom::with('exam_shift.module')->with('room.area')->withCount('exam_room_user')
             ->orderBy('id', 'DESC')->paginate(20);
         $examShifts = ExamShift::with('module')->orderBy('id', 'DESC')->paginate(20);
         $rooms = Room::with('area')->orderBy('id', 'DESC')->paginate(20);

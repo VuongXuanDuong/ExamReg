@@ -38,6 +38,7 @@ return array(
     'App\\Models\\Area' => $baseDir . '/app/Models/Area.php',
     'App\\Models\\Exam' => $baseDir . '/app/Models/Exam.php',
     'App\\Models\\ExamRoom' => $baseDir . '/app/Models/ExamRoom.php',
+    'App\\Models\\ExamRoomUser' => $baseDir . '/app/Models/ExamRoomUser.php',
     'App\\Models\\ExamShift' => $baseDir . '/app/Models/ExamShift.php',
     'App\\Models\\Module' => $baseDir . '/app/Models/Module.php',
     'App\\Models\\ModuleUser' => $baseDir . '/app/Models/ModuleUser.php',

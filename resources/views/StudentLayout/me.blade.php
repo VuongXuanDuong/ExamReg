@@ -9,14 +9,15 @@
 
   <div class="card" style="width:60%; margin:0px auto;">
     <div class="card-header">
-      Thông tin sinh viên {{$student['name']}}
+      Thông tin sinh viên {{$student['full_name']}}
     </div>
     <div class="card-body" style="font-size:20px;">
       <h3 class="card-title"></h3>
       <table class="table table-dashed">
+
         <tr>
           <td>Họ và tên</td>
-          <td> {{$student['name']}} </td>
+          <td> {{$student['full_name']}} </td>
         </tr>
         <tr>
           <td>Tên đăng nhập </td>

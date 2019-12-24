@@ -22,6 +22,8 @@
         <th>Môn thi</th>
         <th>Thời gian</th>
         <th>Địa Điểm</th>
+        <th>Tổng sinh viên</th>
+        <th>Tổng số máy</th>
         <th>Tools</th>
 
 
@@ -31,13 +33,15 @@
             <tr>
                 <td>{{$index+1}}</td>
                 <td>{{$examRoom['name']}}</td>
-                <td>{{$examRoom['examShift']->module->code}}</td>
-                <td>{{$examRoom['examShift']->module->name}}</td>
-                <td> {{date('g:iA', strtotime($examRoom['examShift']->time_start))}} - {{date('g:iA', strtotime($examRoom['examShift']->time_finish))}}
-                    <br>{{$examRoom['examShift']->day}}
+                <td>{{$examRoom['exam_shift']->module->code}}</td>
+                <td>{{$examRoom['exam_shift']->module->name}}</td>
+                <td> {{date('g:iA', strtotime($examRoom['exam_shift']->time_start))}} - {{date('g:iA', strtotime($examRoom['exam_shift']->time_finish))}}
+                    <br>{{$examRoom['exam_shift']->day}}
                 </td>
                 <td>{{$examRoom['room']->name}}
                     <br>{{$examRoom['room']->area->name}}</td>
+                <td> {{ $examRoom['exam_room_user_count']}}</td>
+                <td>{{$examRoom['room']->total_computer}}</td>
                 <td>
                     <div class="btn-group" examRoom_id={{$examRoom['id']}} examRoom_info="{{$examRoom}}">
                         {{-- Edit button --}}

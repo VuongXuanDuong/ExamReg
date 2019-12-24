@@ -9,7 +9,9 @@ class Area extends Model
 {
     //
     protected $fillable = ['name'];
-    public function room(){
+
+    public function room()
+    {
         return $this->hasMany(Room::class);
     }
 }

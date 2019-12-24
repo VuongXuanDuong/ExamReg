@@ -393,6 +393,7 @@ class ComposerStaticInita95b4a50f5585c7f5dc773a6c7d6178f
         'App\\Models\\Area' => __DIR__ . '/../..' . '/app/Models/Area.php',
         'App\\Models\\Exam' => __DIR__ . '/../..' . '/app/Models/Exam.php',
         'App\\Models\\ExamRoom' => __DIR__ . '/../..' . '/app/Models/ExamRoom.php',
+        'App\\Models\\ExamRoomUser' => __DIR__ . '/../..' . '/app/Models/ExamRoomUser.php',
         'App\\Models\\ExamShift' => __DIR__ . '/../..' . '/app/Models/ExamShift.php',
         'App\\Models\\Module' => __DIR__ . '/../..' . '/app/Models/Module.php',
         'App\\Models\\ModuleUser' => __DIR__ . '/../..' . '/app/Models/ModuleUser.php',

@@ -21,11 +21,12 @@ Route::get('logout', 'LoginController@logout');
 
 Route::post('/login', 'LoginController@authLogin')->name('login');
 // Student
-Route::group(['prefix' => 'sinh-vien', 'middleware' => 'student'], function () {
+Route::group(['prefix' => 'student', 'middleware' => 'student'], function () {
     Route::get('/', 'StudentLayoutController@index')->name('studentHome');
     Route::get('me', 'StudentLayoutController@me');
     Route::get('change','StudentLayoutController@changePass');
-    Route::get('changePass','StudentLayoutController@postChangePass');
+    Route::post('changePass','StudentLayoutController@postChangePass');
+    Route::get('registrated','StudentLayoutController@registrated');
 
 });
 // Teacher

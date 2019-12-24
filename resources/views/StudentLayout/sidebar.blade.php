@@ -5,7 +5,7 @@
 
 <div class="nav-side-menu">
     <div class="brand">
-      <h2>Class Survey</h2>
+      <h2>ExamReg</h2>
       <button type="button" class="btn btn-danger times" > <i class="fa fa-times"></i> </button>
     </div>
 
@@ -15,9 +15,24 @@
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
-                  <a href="{{asset('sinh-vien')}}">
-                  <i class="fa fa-dashboard fa-lg"></i> Trang chủ
+                    <a href="">
+                        <i class="fa fa-dashboard fa-lg"></i> Trang Chủ
+                    </a>
+                </li>
+                <li>
+                  <a href="{{asset('student')}}">
+                  <i class="fa fa-dashboard fa-lg"></i> Đăng ký lịch thi
                   </a>
+                </li>
+                <li>
+                    <a href="{{asset('student/registrated')}}">
+                        <i class="fa fa-dashboard fa-lg"></i> Xem lịch đã đăng ký thi
+                    </a>
+                </li>
+                <li>
+                    <a href="{{asset('student/me')}}">
+                        <i class="fa fa-dashboard fa-lg"></i> Thông tin cá nhân
+                    </a>
                 </li>
 
             </ul>
