@@ -1,77 +1,94 @@
 @extends('index')
 
 @section('content')
-  <div class="row">
-    <div class="col-md-9">
-      <h1 class="title">
-        Danh sách sinh viên
-        <button class="btn btn-success" data-toggle="modal" data-target="#insertModal" > <i class="fa fa-plus"></i> </button>
-      </h1>
-
-    </div>
-    <div class="col-md-3">
-      <button type="button" class="btn btn-success" id="excel-import">
-        <i class="far fa-file-excel" ></i>
-        Nhập từ excel
-      </button>
-
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8">
-
-    </div>
-    <div class="col-md-4 bounce" id="excel-input">
-      <form method="POST" action="{{route('importStudents')}}" enctype="multipart/form-data" >
-        @csrf
-        <label for="excel-file">Nhập file định dạng excel:</label>
-          <input id="excel-file" type="file" class="form-control" accept=".xlsx" required name="file" style="width:70%;float:left;">
-          <button type="submit" class="btn btn-success" style="float:left;"> <i class="fa fa-check"></i> </button>
-      </form>
-    </div>
-  </div>
-
-<table class="table">
-  <thead>
-
-    <th>STT</th>
-    <th>Tên đăng nhập</th>
-    <th>Họ và tên</th>
-    <th>VNU email</th>
-    <th>Hành động</th>
-  </thead>
-  <tbody>
-    @foreach($accounts as $index => $account)
-    <tr>
-
-      @if(isset($_GET['page']))
-        <td>{{($_GET['page']-1)*20+$index+1}}</td>
-      @else
-        <td>{{$index+1}}</td>
-      @endif
-      <td>{{$account['username']}}</td>
-      <td>{{$account['full_name']}}</td>
-      <td>{{$account['vnu_mail']}}</td>
-      <td>
-        <div class="btn-group" account_id={{$account['id']}} account_info="{{$account}}">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" onclick="setValueEditForm(this)" > <i class="fa fa-edit"></i> </button>
-
-            <button type="button" class="btn btn-success" onclick = "showStudentInfo(this);" > <i class="fa fa-eye"></i></button>
-            {{-- Delete form --}}
-            <form class="" action="{{url('admin/sinh-vien/'.$account['id'])}}" method="post">
-              {{method_field("delete")}}
-              @csrf
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
-            </form>
-            {{-- End --}}
+ <!-- tab start -->
+  <div class="container-fluid full-width-container value-added-detail-page">
+    <div>
+      <div class="pull-right table-title-top-action">
+        <div class="pmd-textfield pull-left">
+          <input type="text" id="search_form" class="form-control" placeholder="Search for...">
         </div>
-      </td>
-    </tr>
-  @endforeach
-  </tbody>
-</table>
+        <a href="javascript:void(0);" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+      </div>
+      <!-- Title -->
+      <h1 class="section-title" id="services">
+        <span>Sinh viên</span>
+      </h1><!-- End Title -->
+    
+      <!--breadcrum start-->
+      <ol class="breadcrumb text-left">
+        <li><a href="{{asset('admin')}}">Trang chủ</a></li>
+        <li class="active">Sinh viên</li>
+      </ol><!--breadcrum end-->
+    </div>
+
+    <div>
+      <div class="pull-right pmd-card-body">
+        <div class="pmd-textfield pull-left">
+          <button onclick ="choose()"type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success">
+            <input type="file" id="file" style="display: none;
+            ">
+            <script >
+              function choose(){
+                document.getElementById("file").click();
+              }
+            </script>
+
+          Nhập Excel
+          </button>
+         
+         <button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success" data-toggle="modal" data-target="#insertModal">Thêm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive pmd-card pmd-z-depth">
+      <table class="table table-mc-red pmd-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên đăng nhập</th>
+            <th>Họ và tên</th>
+            <th>VNU Email</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+
+        <tbody>
+           @foreach($accounts as $index => $account)
+            <tr>
+              @if(isset($_GET['page']))
+                <td>{{($_GET['page']-1)*20+$index+1}}</td>
+              @else
+                <td>{{$index+1}}</td>
+              @endif
+              <td>{{$account['username']}}</td>
+              <td>{{$account['full_name']}}</td>
+              <td>{{$account['vnu_mail']}}</td>
+              <td class="pmd-table-row-action">
+                <div account_id={{$account['id']}} account_info="{{$account}}">
+                    <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" data-toggle="modal" data-target="#editModal" onclick="setValueEditForm(this)" > <i class="material-icons md-dark pmd-xs">edit</i> </button>
+
+                    <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" onclick = "showStudentInfo(this);" > <i class="material-icons md-dark pmd-xs">visibility</i></button>
+                    {{-- Delete form --}}
+                    <form class="" action="{{url('admin/sinh-vien/'.$account['id'])}}" method="post">
+                      {{method_field("delete")}}
+                      @csrf
+                      <button type="submit" class="
+                      btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger " onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="material-icons md-dark pmd-xs">delete</i> </button>
+                    </form>
+                    {{-- End --}}
+                </div>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>  
+      <!-- Table end -->
+    </div>
+  </div>
+ 
 <div class="row">
     <div class="col-md-2 col-md-offset-5" style="margin:0px auto;">{{$accounts->links()}}</div>
 </div>
