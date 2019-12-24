@@ -51,8 +51,11 @@
                         </button>
 
                         {{-- Show button --}}
-                        <button type="submit" class="btn btn-success" onclick="showExamRoomInfo(this);"><i
-                                    class="fa fa-eye"></i></button>
+{{--                        <button type="submit" class="btn btn-success" onclick="showExamRoomInfo(this);"><i--}}
+{{--                                    class="fa fa-eye"></i></button>--}}
+                        <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
+                            <i class="far fa-address-card"></i>
+                        </a>
 
                         {{--  --}}
 

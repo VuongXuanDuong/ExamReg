@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\ExamRoom;
 use App\Models\ExamShift;
+use App\Models\Module;
+use App\Models\ModuleUser;
 use App\Models\Room;
+use App\StudentAccount;
 use Illuminate\Http\Request;
 
 class ExamRoomController extends Controller
@@ -47,5 +50,10 @@ class ExamRoomController extends Controller
 
 
         return redirect()->back();
+    }
+
+    public function listStudent($id) {
+       $students = ExamRoom::where('id',$id)->with('exam_room_user.user')->with('room.area')->with('exam_shift.module')->get();
+        return view('examRoom.listStudent', compact( 'students'));
     }
 }

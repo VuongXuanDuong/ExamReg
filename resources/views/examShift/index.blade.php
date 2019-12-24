@@ -35,8 +35,10 @@
                 <td>{{$examShift['module']->name}}</td>
                 <td>{{$examShift['exam']->name}}</td>
                 <td>{{$examShift['day']}}</td>
-                <td>{{date('g:iA', strtotime($examShift['time_start']))}}</td>
-                <td>{{date('g:iA', strtotime($examShift['time_finish']))}}</td>
+                <td>{{$examShift['time_start']}}</td>
+                <td>{{$examShift['time_finish']}}</td>
+{{--                <td>{{date('g:iA', strtotime($examShift['time_start']))}}</td>--}}
+{{--                <td>{{date('g:iA', strtotime($examShift['time_finish']))}}</td>--}}
                 <td>
                     <div class="btn-group" examShift_id={{$examShift['id']}} examShift_info="{{$examShift}}">
                         {{-- Edit button --}}
