@@ -1,8 +1,7 @@
 @extends('index')
 @section('content')
 
-
-    <script type="text/javascript">
+     <script type="text/javascript">
         // Session  login success
         @if(session('login-success'))
         swal({

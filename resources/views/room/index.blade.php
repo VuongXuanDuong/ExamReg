@@ -1,66 +1,93 @@
 @extends('index')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-9">
-            <h1 class="title">
-                Danh sách phòng máy
-                <button class="btn btn-success" data-toggle="modal" data-target="#insertModal"><i
-                            class="fa fa-plus"></i></button>
-            </h1>
+   <div class="container-fluid full-width-container value-added-detail-page">
+    <div>
+      <div class="pull-right table-title-top-action">
+        <div class="pmd-textfield pull-left">
+          <input type="text" id="search_form" class="form-control" placeholder="Search for...">
         </div>
-        <div class="col-md-3">
-        </div>
+        <a href="javascript:void(0);" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+      </div>
+      <!-- Title -->
+      <h1 class="section-title" id="services">
+        <span>Phòng máy</span>
+      </h1><!-- End Title -->
+    
+      <!--breadcrum start-->
+      <ol class="breadcrumb text-left">
+        <li><a href="{{asset('admin')}}">Trang chủ</a></li>
+        <li class="active">Phòng máy</li>
+      </ol><!--breadcrum end-->
     </div>
-    {{--    List room --}}
-    <table class="table">
-        <thead>
 
-        <th>STT</th>
-        <th>Tên phòng</th>
-        <th>Số lượng máy</th>
-        <th>Địa điểm</th>
-        <th>Công cụ</th>
+    <div>
+      <div class="pull-right pmd-card-body">
+        <div class="pmd-textfield pull-left">
+          <!--<button onclick ="choose()"type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success">
+            <input type="file" id="file" style="display: none;
+            ">
+            <script >
+              function choose(){
+                document.getElementById("file").click();
+              }
+            </script>
 
+          Nhập Excel
+          </button>-->
+         
+         <button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success" data-toggle="modal" data-target="#insertModal">Thêm</button>
+        </div>
+      </div>
+    </div>
 
-        </thead>
-        <tbody>
-        @foreach($rooms as $index =>  $room )
+    {{-- List room --}}
+    <!-- Table -->
+    <div class="table-responsive pmd-card pmd-z-depth">
+        <table class="table table-mc-red pmd-table">
+            <thead>
             <tr>
-                <td>{{$index+1}}</td>
-                <td>{{$room['name']}}</td>
-                <td>{{$room['total_computer']}}</td>
-                <td>{{$room['area']->name}}</td>
-                <td>
-                    <div class="btn-group" room_id={{$room['id']}} room_info="{{$room}}">
-                        {{-- Edit button --}}
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"
-                                onclick="setValueEditForm(this)">
-                            <i class="fa fa-edit"></i>
-                        </button>
+                <th>STT</th>
+                <th>Tên phòng</th>
+                <th>Số lượng máy</th>
+                <th>Địa điểm</th>
+                <th>Công cụ</th>
+              </tr>
+            </thead>
 
-                        {{-- Show button --}}
-                        <button type="submit" class="btn btn-success" onclick="showRoomInfo(this);"><i
-                                    class="fa fa-eye"></i></button>
+            <tbody>
+               @foreach($rooms as $index => $room)
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{$room['name']}}</td>
+                    <td>{{$room['total_computer']}}</td>
+                    <td>{{$room['area']->name}}</td>
+                    <td class="pmd-table-row-action">
+                        <div room_id={{$room['id']}} room_info="{{$room}}">
+                            {{-- Edit button --}}
+                            <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" data-toggle="modal" data-target="#editModal" onclick="setValueEditForm(this)" > <i class="material-icons md-dark pmd-xs">edit</i> </button>
 
-                        {{--  --}}
+                            {{-- SHow button --}}
+                            <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" onclick = "showRoomInfo(this);" > <i class="material-icons md-dark pmd-xs">visibility</i></button>
+                            {{--end show --}}
 
-                        {{-- Delete button --}}
-                        <form method="post" action="{{ url('/admin/room/'.$room->id) }}">
-                            @csrf
-                            {!! method_field('delete') !!}
-                            <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')"><i
-                                        class="fa fa-trash"></i></button>
-                        </form>
-                        {{--  --}}
-
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+                            {{-- Delete form --}}
+                            <form action="{{ url('/admin/room/'.$room->id) }}" method="post">
+                              {{method_field("delete")}}
+                              @csrf
+                              <button type="submit" class="
+                              btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger " onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="material-icons md-dark pmd-xs">delete</i> </button>
+                            </form>
+                            {{-- End --}}
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>  
+      <!-- Table end -->
+    </div>
+</div>  
 
     {{--    form edit room--}}
     <div class="modal" id="editModal">
