@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('content')
-    
+
     <div class="container-fluid full-width-container value-added-detail-page">
         <div>
           <div class="pull-right table-title-top-action">
@@ -14,14 +14,13 @@
           <h1 class="section-title" id="services">
             <span>Ca thi</span>
           </h1><!-- End Title -->
-        
+
           <!--breadcrum start-->
           <ol class="breadcrumb text-left">
             <li><a href="{{asset('admin')}}">Trang chủ</a></li>
             <li class="active">Ca thi</li>
           </ol><!--breadcrum end-->
         </div>
-
         <div>
           <div class="pull-right pmd-card-body">
             <div class="pmd-textfield pull-left">
@@ -36,7 +35,7 @@
 
               Nhập Excel
               </button>-->
-             
+
              <button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success" data-toggle="modal" data-target="#insertModal">Thêm</button>
             </div>
           </div>
@@ -91,11 +90,11 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>  
+            </table>
           <!-- Table end -->
         </div>
-    </div>  
-    
+    </div>
+
 {{--    form insert--}}
     <div class="modal" id="insertModal">
         <div class="modal-dialog">

@@ -13,13 +13,14 @@
           <h1 class="section-title" id="services">
             <span>Phòng thi</span>
           </h1><!-- End Title -->
-        
+
           <!--breadcrum start-->
           <ol class="breadcrumb text-left">
             <li><a href="{{asset('admin')}}">Trang chủ</a></li>
             <li class="active">Phòng thi</li>
           </ol><!--breadcrum end-->
         </div>
+
 
         <div>
           <div class="pull-right pmd-card-body">
@@ -35,7 +36,7 @@
 
               Nhập Excel
               </button>-->
-             
+
              <button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success" data-toggle="modal" data-target="#insertModal">Thêm</button>
             </div>
           </div>
@@ -77,9 +78,13 @@
                                 <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" data-toggle="modal" data-target="#editModal" onclick="setValueEditForm(this)" > <i class="material-icons md-dark pmd-xs">edit</i> </button>
 
                                 {{-- SHow button --}}
-                                <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" onclick = "showExamRoomInfo(this);" > <i class="material-icons md-dark pmd-xs">visibility</i></button>
-                                {{--end show --}}
-
+                                <!-- <button type="button" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" onclick = "showExamRoomInfo(this);" > <i class="material-icons md-dark pmd-xs">visibility</i></button>
+                                {{--end show --}} -->
+                                <!-- <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
+                                    <i class="far fa-address-card"></i> -->
+                                    <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
+                                        <i class="far fa-address-card"></i>
+                                    </a>
                                 {{-- Delete form --}}
                                 <form action="{{ url('/admin/exam-room/'.$examRoom->id) }}" method="post">
                                   {{method_field("delete")}}
@@ -93,11 +98,11 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>  
+            </table>
           <!-- Table end -->
         </div>
-    </div>  
-    
+    </div>
+
     {{--    form edit--}}
     <div class="modal" id="editModal">
         <div class="modal-dialog">

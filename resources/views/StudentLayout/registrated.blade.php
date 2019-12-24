@@ -89,6 +89,7 @@
                 getAllExamShifts() {
                     axios.get('/api/all-module-registrated/' + this.$refs.user.value).then(res => {
                         this.modules = res.data;
+                        console.log(this.modules);
                         this.modules.forEach(module => {
                             this.examShift.day = module.exam_room.exam_shift.day;
                             this.examShift.time_start = module.exam_room.exam_shift.time_start;

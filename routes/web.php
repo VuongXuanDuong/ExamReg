@@ -100,6 +100,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     // Exam Room
     Route::group(['prefix' => 'exam-room'], function () {
         Route::get('/','ExamRoomController@index');
+        Route::get('/list-student/{id}','ExamRoomController@listStudent');
     });
     Route::resource('exam-room','ExamRoomController');
 });
