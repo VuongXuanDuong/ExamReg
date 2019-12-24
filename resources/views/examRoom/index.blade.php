@@ -82,8 +82,8 @@
                                 {{--end show --}} -->
                                 <!-- <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
                                     <i class="far fa-address-card"></i> -->
-                                    <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
-                                        <i class="far fa-address-card"></i>
+                                    <a class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
+                                        <i class="material-icons md-dark pmd-xs">visibility</i>
                                     </a>
                                 {{-- Delete form --}}
                                 <form action="{{ url('/admin/exam-room/'.$examRoom->id) }}" method="post">

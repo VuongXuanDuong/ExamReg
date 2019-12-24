@@ -73,25 +73,30 @@ class StudentLayoutController extends Controller
     public function registerExamSessions(Request $request)
     {
 
-        $shiftId = array_get($request, 'ids');
+        $shiftIds = array_get($request, 'ids');
         $studentCode = User::find($request->userId)->name;
         $student = StudentAccount::where('username', '=', $studentCode)->first();
         $idStudent = $student['id'];
-        $shift = ExamShift::find($shiftId);
-        $examRooms = ExamRoom::where('exam_shift_id', $shiftId)->orderBy('exam_rooms.id', 'asc')
-            ->join('rooms', 'exam_rooms.room_id', 'rooms.id')
-            ->select('exam_rooms.id as id', 'rooms.total_computer as capacity')->get();
-        foreach ($examRooms as $examRoom) {
-            if ($this->totalExamRoomRegistedComputers($examRoom) < $examRoom->capacity) {
-                $selectedExamRoom = $examRoom;
-                break;
+//        $shift = ExamShift::find($shiftId);
+        $examRooms = [];
+        $selectedExamRoom = [];
+        foreach ( $shiftIds as $shiftId ) {
+            $examRooms = ExamRoom::where('exam_shift_id', $shiftId)->orderBy('exam_rooms.id', 'asc')
+                ->join('rooms', 'exam_rooms.room_id', 'rooms.id')
+                ->select('exam_rooms.id as id', 'rooms.total_computer as capacity')->get();
+            foreach ($examRooms as $examRoom) {
+                if ($this->totalExamRoomRegistedComputers($examRoom) < $examRoom->capacity) {
+                    $selectedExamRoom = $examRoom;
+                    break;
+                }
             }
-        }
-        if (empty($selectedExamRoom)) {
-            throw new \Exception("Không còn phòng thi nào còn trống, vui lòng thử lại sau", 1);
+            if (empty($selectedExamRoom)) {
+                throw new \Exception("Không còn phòng thi nào còn trống, vui lòng thử lại sau", 1);
 
+            }
+            ExamRoomUser::insert(['exam_room_id' => $selectedExamRoom->id, 'user_id' => $idStudent]);
         }
-        ExamRoomUser::insert(['exam_room_id' => $selectedExamRoom->id, 'user_id' => $idStudent]);
+//        ExamRoomUser::insert(['exam_room_id' => $selectedExamRoom->id, 'user_id' => $idStudent]);
         return 'ok';
     }
 
@@ -102,7 +107,7 @@ class StudentLayoutController extends Controller
 
     public function unRegisterAShift($examRoomUserId)
     {
-        $module = ExamRoomUser::find($examRoomUserId)->first();
+        $module = ExamRoomUser::find($examRoomUserId);
         $module->delete();
         return 'ok';
     }

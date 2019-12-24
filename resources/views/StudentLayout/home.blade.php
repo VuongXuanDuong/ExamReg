@@ -133,7 +133,6 @@ methods:{
     axios.get('/api/all-modules/' + this.$refs.user.value).then(res => {
       this.modules = res.data[0];
       this.moduleRegisteds = res.data[1];
-      console.log(this.moduleRegisteds);
       this.modules.forEach(module => {
         module.module.exam_shift.forEach(examShift => {
           examShift.module_name = module.module.name;
@@ -142,7 +141,6 @@ methods:{
           examShift.isRegisted = false;
           this.moduleRegisteds.forEach(moduleRegisted => {
             this.moduleId = moduleRegisted.exam_room.exam_shift.module_id;
-            console.log(module.module.id);
             if (this.moduleId == module.module.id ) {
               examShift.isExamShiftRegisted = true;
             }

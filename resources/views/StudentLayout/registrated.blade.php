@@ -62,6 +62,7 @@
         </tr>
         </tbody>
     </table>
+    <button  class="btn btn-success" @click="myFunction">Print</button>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script>
         new Vue({
@@ -77,8 +78,12 @@
                 }
             },
             methods: {
+                myFunction() {
+                  window.print();
+                },
                 deleteModule(examRoomUserId) {
                     axios.delete('/api/unregister/' + examRoomUserId).then(res => {
+                        console.log(res);
                         this.reply = res.data;
                         if (this.reply == 'ok') {
                             location.reload();
@@ -91,16 +96,15 @@
                         this.modules = res.data;
                         console.log(this.modules);
                         this.modules.forEach(module => {
-                            this.examShift.day = module.exam_room.exam_shift.day;
-                            this.examShift.time_start = module.exam_room.exam_shift.time_start;
-                            this.examShift.time_finish = module.exam_room.exam_shift.time_finish;
-                            this.examShift.module_name = module.exam_room.exam_shift.module.name;
-                            this.examShift.module_code = module.exam_room.exam_shift.module.code;
-                            this.examShift.room = module.exam_room.room.name;
-                            this.examShift.area = module.exam_room.room.area.name;
-                            this.examShift.examRoomUserId = module.id;
-
-                            this.examShifts.push(this.examShift);
+                            module.day = module.exam_room.exam_shift.day;
+                            module.time_start = module.exam_room.exam_shift.time_start;
+                            module.time_finish = module.exam_room.exam_shift.time_finish;
+                            module.module_name = module.exam_room.exam_shift.module.name;
+                            module.module_code = module.exam_room.exam_shift.module.code;
+                            module.room = module.exam_room.room.name;
+                            module.area = module.exam_room.room.area.name;
+                            module.examRoomUserId = module.id;
+                            this.examShifts.push(module);
                         })
                     });
                 },
