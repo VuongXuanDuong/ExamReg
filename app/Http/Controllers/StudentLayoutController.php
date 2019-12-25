@@ -64,10 +64,11 @@ class StudentLayoutController extends Controller
         $studentCode = User::find($userId)->name;
         $student = StudentAccount::where('username', '=', $studentCode)->first();
         $id_student = $student['id'];
-        $modules = ModuleUser::where('user_id', '=', $id_student)->with('module.exam_shift.exam_room')
+        $modules = ModuleUser::where('user_id', '=', $id_student)->with('module.exam_shift.exam_room.room')
             ->get();
+        $site = ExamRoomUser::withCount('exam_room')->with('exam_room.exam_shift')->get();
         $moduleRegisted = ExamRoomUser::where('user_id', '=', $id_student)->with('exam_room.exam_shift')->get();
-        return [$modules, $moduleRegisted];
+        return [$modules, $moduleRegisted, $site];
     }
 
     public function registerExamSessions(Request $request)
@@ -77,7 +78,6 @@ class StudentLayoutController extends Controller
         $studentCode = User::find($request->userId)->name;
         $student = StudentAccount::where('username', '=', $studentCode)->first();
         $idStudent = $student['id'];
-//        $shift = ExamShift::find($shiftId);
         $examRooms = [];
         $selectedExamRoom = [];
         foreach ( $shiftIds as $shiftId ) {

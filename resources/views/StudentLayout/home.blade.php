@@ -36,13 +36,15 @@ swal({
 <table class="table">
   <thead>
 
-  <th>STT</th>
+  <th>Chọn</th>
+  <th>Trạng thái</th>
   <th>Name</th>
   <th>Code</th>
   <th>Ngày</th>
   <th>Bắt đầu</th>
   <th>Kết thúc</th>
-  <th>Công cụ</th>
+  <th>Đã ĐK</th>
+  <th>Tổng SV</th>
 
 
   </thead>
@@ -51,14 +53,20 @@ swal({
       <td >
         <i v-if="!examShift.isExamShiftRegisted || examShift.isRegisted" class="fas fa-check-circle" :class="{green: examShift.isRegisted}" @click="selectExamShift(examShift)"></i>
       </td>
+      <td>
+        <i v-if="examShift.status">Đủ điều kiện thi</i>
+        <i v-if="!examShift.status">Không đủ điều kiện thi</i>
+      </td>
       <td>@{{examShift.module_name}}</td>
       <td>@{{examShift.module_code}}</td>
       <td>@{{examShift.day}}</td>
       <td>@{{examShift.time_start}}</td>
       <td>@{{examShift.time_finish}}</td>
-      <td>@{{examShift.id}}</td>
-      <td>@{{examShift.isRegisted}}</td>
-      <td>@{{examShift.isExamShiftRegisted}}</td>
+      <td>@{{examShift.site}}</td>
+      <td>@{{examShift.total}}</td>
+{{--      <td>@{{examShift.id}}</td>--}}
+{{--      <td>@{{examShift.isRegisted}}</td>--}}
+{{--      <td>@{{examShift.isExamShiftRegisted}}</td>--}}
     </tr>
   </tbody>
 </table>
@@ -71,9 +79,6 @@ swal({
   <th>Ngày</th>
   <th>Bắt đầu</th>
   <th>Kết thúc</th>
-  <th>Công cụ</th>
-  <th></th>
-  <th></th>
 
   </thead>
   <tbody>
@@ -86,9 +91,6 @@ swal({
       <td>@{{examShift.day}}</td>
       <td>@{{examShift.time_start}}</td>
       <td>@{{examShift.time_finish}}</td>
-      <td>@{{examShift.id}}</td>
-      <td>@{{examShift.isRegisted}}</td>
-
     </tr>
   </tbody>
 </table>
@@ -133,18 +135,37 @@ methods:{
     axios.get('/api/all-modules/' + this.$refs.user.value).then(res => {
       this.modules = res.data[0];
       this.moduleRegisteds = res.data[1];
+      this.sites = res.data[2];
       this.modules.forEach(module => {
         module.module.exam_shift.forEach(examShift => {
+          examShift.status = module.status;
           examShift.module_name = module.module.name;
           examShift.module_code = module.module.code;
           examShift.isExamShiftRegisted = false;
           examShift.isRegisted = false;
+          if (examShift.status == 0) {
+            examShift.isExamShiftRegisted = true;
+          }
           this.moduleRegisteds.forEach(moduleRegisted => {
             this.moduleId = moduleRegisted.exam_room.exam_shift.module_id;
             if (this.moduleId == module.module.id ) {
               examShift.isExamShiftRegisted = true;
             }
-          }),
+          })
+          // console.log(examShift.exam_room);
+          examShift.total = 0;
+          examShift.exam_room.forEach(examRoom => {
+            examShift.total += examRoom.room.total_computer;
+          })
+          this.sites.forEach(site => {
+            let moduleU =  site.exam_room.exam_shift.module_id;
+            if (module.module.id == moduleU) {
+              examShift.site = site.exam_room_count;
+            } else {
+              examShift.site = 0;
+            }
+          })
+          console.log(examShift.site);
           this.examShifts.push(examShift);
         })
 
