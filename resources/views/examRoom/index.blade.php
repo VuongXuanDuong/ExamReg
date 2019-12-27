@@ -55,7 +55,7 @@
                     <th>Địa Điểm</th>
                     <th>Tổng sinh viên</th>
                     <th>Tổng số máy</th>
-                    <th>Tools</th>
+                    <th>Hành động</th>
                 </thead>
 
                 <tbody>
@@ -82,8 +82,8 @@
                                 {{--end show --}} -->
                                 <!-- <a class="btn btn-success" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
                                     <i class="far fa-address-card"></i> -->
-                                    <a class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
-                                        <i class="material-icons md-dark pmd-xs">visibility</i>
+                                    <a target="_blank" class="btn-sm btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" href="{{asset('admin/exam-room/list-student/'.$examRoom->id )}}">
+                                        <i class="material-icons md-dark pmd-xs"><i class="fa fa-print"></i></i>
                                     </a>
                                 {{-- Delete form --}}
                                 <form action="{{ url('/admin/exam-room/'.$examRoom->id) }}" method="post">
@@ -157,7 +157,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Exam Room</h4>
+                    <h4 class="modal-title">Tạo phòng thi</h4>
                 </div>
                 <!-- Modal body -->
                 <form id="formInsert" class="form-group" action="{{url('admin/exam-room')}}" method="post">
@@ -165,7 +165,7 @@
                         @csrf
                         <div class="form-group">
                             <label>Tên phòng thi</label>
-                            <input type="text" class="form-control" name="name" required
+                            <input type="text" class="form-control" name="name" placeholder="Nhập tên" required
                                    value="">
                         </div>
                         <div class="form-group">

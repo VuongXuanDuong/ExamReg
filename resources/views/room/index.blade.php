@@ -51,7 +51,7 @@
                 <th>Tên phòng</th>
                 <th>Số lượng máy</th>
                 <th>Địa điểm</th>
-                <th>Công cụ</th>
+                <th>Hành động</th>
               </tr>
             </thead>
 
@@ -96,7 +96,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Room</h4>
+                    <h4 class="modal-title">Sửa phòng máy</h4>
 
                 </div>
 
@@ -106,17 +106,17 @@
                         @csrf
                         {!! method_field('put') !!}
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên phòng</label>
                             <input type="text" class="form-control" name="name" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Total Computer</label>
+                            <label for="">Số lượng máy</label>
                             <input type="text" class="form-control" name="total_computer" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label>Exam Area</label>
+                            <label>Địa điểm</label>
                             <select name="area_id" class="form-control">
                                 @foreach ($areas as $index => $area)
                                     <option value="{{ $area['id'] }}" {{ $area['id'] == $room['area_id'] ? 'selected' : '' }}> {{ $area['name']}}</option>
@@ -141,7 +141,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Room</h4>
+                    <h4 class="modal-title">Tạo phòng máy</h4>
 
                 </div>
 
@@ -151,17 +151,17 @@
                         @csrf
 
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên phòng</label>
                             <input type="text" class="form-control" name="name"
-                                   placeholder="Enter name room" required value="">
+                                   placeholder="Nhập tên" required value="">
                         </div>
                         <div class="form-group">
-                            <label>Total Computer</label>
-                            <input type="text" class="form-control" name="total_computer" placeholder="Enter a number"
+                            <label>Số lượng máy</label>
+                            <input type="text" class="form-control" name="total_computer" placeholder="Nhập số lượng máy"
                                    required value="">
                         </div>
                         <div class="form-group">
-                            <label>Exam Area</label>
+                            <label>Địa điểm</label>
                             <br>
                             <select name="area_id" class="form-control">
                                 @foreach ($areas as $index => $area)
@@ -232,11 +232,11 @@
                         <td>${info.total_computer}</td>
                     </tr>
                     <tr>
-                        <th>Exam Area  </th>
+                        <th>Địa điểm </th>
                         <td>${info.area.name}</td>
                     </tr>
                      <tr>
-                        <th>Time create  </th>
+                        <th>Thời gian tạo  </th>
                         <td>${info.created_at}</td>
                     </tr>
                 </table>

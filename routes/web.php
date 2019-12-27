@@ -34,21 +34,10 @@ Route::group(['prefix' => 'giang-vien', 'middleware' => 'teacher'], function () 
     Route::get('/', 'TeacherLayoutController@index')->name('teacherHome');
     Route::get('me', 'TeacherLayoutController@me');
 
-    Route::get('khao-sat/{id}', 'TeacherLayoutController@courseInfo');
-    Route::get('khao-sat/danh-sach/{id}', 'TeacherLayoutController@courseStudents');
-
-    Route::get('change', 'TeacherLayoutController@changePass');
-    Route::post('change', 'TeacherLayoutController@postChangePass')->name('changeTeacherPass');
 });
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'HomeController@index')->name('home');
-
-    // Giang-vien
-    Route::group(['prefix' => 'giang-vien'], function () {
-        Route::post('import', 'TeacherController@import')->name('importTeachers');
-    });
-    Route::resource('giang-vien', 'TeacherController');
 
 
     // Sinh vien
@@ -76,6 +65,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/list-student/{id}','ModuleController@listStudent');
         Route::post('/list-student/{id}','ModuleController@storeStudent');
         Route::delete('/list-student/{id}','ModuleController@destroyStudent');
+        Route::post('/list-student/import/{id}','ModuleController@importPermit');
+        Route::post('/list-student/deny/{id}','ModuleController@importDeny');
     });
     Route::resource('module','ModuleController');
 

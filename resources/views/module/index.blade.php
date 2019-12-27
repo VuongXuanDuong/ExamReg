@@ -48,10 +48,10 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Name</th>
-                    <th>Code</th>
+                    <th>Môn học</th>
+                    <th>Mã môn học</th>
                     <th>Tổng sinh viên</th>
-                    <th>Công cụ</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
 
@@ -72,7 +72,7 @@
                                 {{--end show --}}
 
                                 <a class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" href="{{asset('admin/module/list-student/'.$module->id )}}">
-                                  <i class="material-icons md-dark pmd-xs">visibility</i>
+                                  <i class="material-icons md-dark pmd-xs"><i class="fa fa-list"></i></i>
                                 </a>
 
                                 {{-- Delete form --}}
@@ -91,54 +91,7 @@
             </table>  
           <!-- Table end -->
         </div>
-    </div> 
-
-{{--    <div class="modal" id="studentModal">--}}
-{{--        <div class="modal-dialog">--}}
-{{--            <div class="modal-content">--}}
-{{--                <!-- Modal Header -->--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h4 class="modal-title">Xem sinh viên lớp học phần</h4>--}}
-{{--                    <div>--}}
-{{--                        <h4>   bat dau  ket thuc</h4>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <table class="table" >--}}
-{{--                    <thead>--}}
-
-{{--                    <th>STT</th>--}}
-{{--                    <th>Họ và tên</th>--}}
-{{--                    <th>Mã sinh viên</th>--}}
-{{--                    <th>Trạng Thái</th>--}}
-{{--                    <th>Công cụ</th>--}}
-{{--                    </thead>--}}
-{{--                    <tbody>--}}
-{{--                    <tr id="formStudent">--}}
-{{--                        <td id="index"></td>--}}
-{{--                        <td id="nameStudent"></td>--}}
-{{--                        <td id="codeStudent"></td>--}}
-{{--                        <td id="status"></td>--}}
-{{--                        <td></td>--}}
-{{--                        @if (is_array($users) || is_object($users))--}}
-{{--                            <br>bat dau {{$users}} ket thuc--}}
-{{--                            @foreach( $users as $in => $user)--}}
-{{--                                <td>{{$in+1}}</td>--}}
-{{--                                <td>{{ $user['user']->full_name }}</td>--}}
-{{--                                <td>{{ $user['user']->username }}</td>--}}
-{{--                                <td></td>--}}
-{{--                                <td></td>--}}
-{{--                            @endforeach--}}
-{{--                        @endif--}}
-{{--                    </tr>--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--                <!-- Modal footer -->--}}
-{{--                <div class="modal-footer">--}}
-{{--                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    </div>
     {{--    form edit module--}}
     <div class="modal" id="editModal">
         <div class="modal-dialog">
@@ -146,7 +99,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Module</h4>
+                    <h4 class="modal-title">Sửa môn học</h4>
 
                 </div>
 
@@ -156,12 +109,12 @@
                         @csrf
                         {!! method_field('put') !!}
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Môn học</label>
                             <input type="text" class="form-control" name="name" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Code</label>
+                            <label for="">Mã môn học</label>
                             <input type="text" class="form-control" name="code" required
                                    value="">
                         </div>
@@ -184,7 +137,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Module</h4>
+                    <h4 class="modal-title">Tạo môn học</h4>
 
                 </div>
 
@@ -194,13 +147,13 @@
                         @csrf
 
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Môn học</label>
                             <input type="text" class="form-control" name="name"
-                                   placeholder="Enter name module" required value="">
+                                   placeholder="Nhập tên môn học" required value="">
                         </div>
                         <div class="form-group">
-                            <label>Code</label>
-                            <input type="text" class="form-control" name="code" placeholder="Enter a short name"
+                            <label>Mã môn học</label>
+                            <input type="text" class="form-control" name="code" placeholder="Nhập mã môn học"
                                    required value="">
                         </div>
                     </div>

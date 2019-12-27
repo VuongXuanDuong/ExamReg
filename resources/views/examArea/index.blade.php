@@ -48,8 +48,8 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Name</th>
-                    <th>Tool</th>
+                    <th>Tên</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
 
@@ -91,7 +91,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Exam Area</h4>
+                    <h4 class="modal-title">Sửa khu vực thi</h4>
                 </div>
                 <!-- Modal body -->
                 <form id="formEdit" class="form-group" action="{{url('admin/exam-area')}}" method="post">
@@ -99,7 +99,7 @@
                         @csrf
                         {!! method_field('put') !!}
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name" required
                                    value="">
                         </div>
@@ -119,16 +119,16 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Exam</h4>
+                    <h4 class="modal-title">Tạo khu vực thi</h4>
                 </div>
                 <!-- Modal body -->
                 <form id="formInsert" class="form-group" action="{{url('admin/exam-area')}}" method="post">
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name"
-                                   placeholder="Enter name module" required value="">
+                                   placeholder="Nhập tên" required value="">
                         </div>
                     </div>
 
@@ -172,17 +172,17 @@
         function showExamAreaInfo(elem) {
             let info = JSON.parse(elem.parentNode.getAttribute('examArea_info'));
             swal({
-                title: "Exam Area",
+                title: "Khu vực thi",
                 confirmButtonText: 'Thoát',
                 html:
                     `
                  <table class="table" style="text-align:left;">
                     <tr>
-                        <th>Name  </th>
+                        <th>Tên</th>
                         <td>${info.name}</td>
                     </tr>
                      <tr>
-                        <th>Time create  </th>
+                        <th>Thời gian tạo </th>
                         <td>${info.created_at}</td>
                     </tr>
                 </table>

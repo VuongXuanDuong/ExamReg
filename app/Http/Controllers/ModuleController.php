@@ -6,7 +6,9 @@ use App\Models\Exam;
 use App\Models\Module;
 use App\Models\ModuleUser;
 use App\StudentAccount;
+use App\User;
 use Illuminate\Http\Request;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class ModuleController extends Controller
 {
@@ -75,4 +77,69 @@ class ModuleController extends Controller
         return redirect()->back()->with('del-success', 'Xóa thành công');
     }
 
+    public function importPermit(Request $request, $id)
+    {
+        $exam = Exam::orderBy('id', 'desc')->first();
+        $exam_id = $exam->id;
+        if ($request->hasFile('file')) {
+            $file = $request->file;
+            if ($file->getClientOriginalExtension() == 'xlsx') {
+                $students = (new FastExcel)->import($file)->toArray();
+                // check if the first column is STT
+                if (strtolower(array_keys($students[0])[0]) != "stt") {
+                    return redirect()->back()->with('error', 'File không đúng định dạng');
+                }
+                $arr = array_filter($students, function ($student) {
+                    return $student['STT'] != '';
+                });
+                foreach ($arr as $student) {
+                    $value = array_values($student);
+                    // filtering username  only number
+                    $username = preg_replace('/[^0-9]/', '', $value[1]);
+                    //Creae student account from file
+                    $student = StudentAccount::where('username', $username)->first();
+                    $user_id = $student['id'];
+                    ModuleUser::create(["module_id" => $id, "user_id" => $user_id,
+                        "status" => true, "exam_id" => $exam_id]);
+                }
+                return redirect()->back()->with('create-success', 'Thêm thành công');
+            } else {
+                return redirect()->back()->with('error', 'File không đúng định dạng');
+            }
+
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function importDeny(Request $request, $id)
+    {
+        $exam = Exam::orderBy('id', 'desc')->first();
+        $exam_id = $exam->id;
+        if ($request->hasFile('file')) {
+            $file = $request->file;
+            if ($file->getClientOriginalExtension() == 'xlsx') {
+                $students = (new FastExcel)->import($file)->toArray();
+                // check if the first column is STT
+                if (strtolower(array_keys($students[0])[0]) != "stt") {
+                    return redirect()->back()->with('error', 'File không đúng định dạng');
+                }
+                $arr = array_filter($students, function ($student) {
+                    return $student['STT'] != '';
+                });
+            }
+            foreach ($arr as $student) {
+                $value = array_values($student);
+                // filtering username  only number
+                $username = preg_replace('/[^0-9]/', '', $value[1]);
+                //Creae student account from file
+                $student = StudentAccount::where('username', $username)->first();
+                $user_id = $student['id'];
+                $module_user = ModuleUser::where('user_id',$user_id)->where('module_id',$id)->first();
+                $module_user->status = 0;
+                $module_user->save();
+            }
+            return redirect()->back()->with('create-success', 'Thêm thành công');
+        }
+    }
 }

@@ -51,10 +51,10 @@
                     <th>Mã môn học</th>
                     <th>Môn học</th>
                     <th>Kỳ thi</th>
-                    <th>Day</th>
-                    <th>Time Start</th>
-                    <th>Time Finish</th>
-                    <th>Tools</th>
+                    <th>Ngày thi</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>Hành động</th>
                 </tr>
                 </thead>
 
@@ -94,6 +94,60 @@
           <!-- Table end -->
         </div>
     </div>
+{{-- form edit--}}
+    <div class="modal" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sửa ca thi</h4>
+                </div>
+                <!-- Modal body -->
+                <form id="formEdit" class="form-group" action="{{url('admin/exam-shift')}}" method="post">
+                    <div class="modal-body">
+                        @csrf
+                        {!! method_field('put') !!}
+                        <div class="form-group">
+                            <label>Môn học</label>
+                            <select name="module_id" class="form-control">
+                                @foreach ($modules as $index => $module)
+                                    <option value="{{ $module['id'] }}" {{ $module['id'] == $examShift['module_id'] ? 'selected' : '' }}> {{$module['code']}} - [{{ $module['name']}}]</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Kỳ thi</label>
+                            <select name="exam_id" class="form-control">
+                                @foreach ($exams as $index => $exam)
+                                    <option value="{{ $exam['id'] }}" {{ $exam['id'] == $examShift['exam_id'] ? 'selected' : '' }}> {{ $exam['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Ngày thi</label>
+                            <input type="date" class="form-control" name="day" required
+                                   value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Bắt đầu</label>
+                            <input type="time" class="form-control" name="time_start" required
+                                   value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Kết thúc</label>
+                            <input type="time" class="form-control" name="time_finish" required
+                                   value="">
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Sửa</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {{--    form insert--}}
     <div class="modal" id="insertModal">
@@ -101,7 +155,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Exam</h4>
+                    <h4 class="modal-title">Tạo ca thi</h4>
                 </div>
                 <!-- Modal body -->
                 <form id="formInsert" class="form-group" action="{{url('admin/exam-shift')}}" method="post">
@@ -110,7 +164,6 @@
                         <div class="form-group">
                             <label>Môn học</label>
                             <select name="module_id" class="form-control">
-                                <option>-- --</option>
                                 @foreach ($modules as $index => $module)
                                     <option value="{{ $module['id'] }}" }}> {{$module['code']}} - [{{ $module['name']}}]</option>
                                 @endforeach
@@ -119,24 +172,23 @@
                         <div class="form-group">
                             <label>Kỳ thi</label>
                             <select name="exam_id" class="form-control">
-                                <option>-- --</option>
                                 @foreach ($exams as $index => $exam)
                                     <option value="{{ $exam['id'] }}" }}> {{ $exam['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Day</label>
+                            <label for="">Ngày thi</label>
                             <input type="date" class="form-control" name="day" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Time Start</label>
+                            <label for="">Thời gian bắt đầu</label>
                             <input type="time" class="form-control" name="time_start" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Time Finish</label>
+                            <label for="">Thời gian kết thúc</label>
                             <input type="time" class="form-control" name="time_finish" required
                                    value="">
                         </div>
@@ -148,7 +200,6 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -187,17 +238,32 @@
         function showExamShiftInfo(elem) {
             let info = JSON.parse(elem.parentNode.getAttribute('examShift_info'));
             swal({
-                title: "Exam Shift",
+                title: "Ca thi",
                 confirmButtonText: 'Thoát',
                 html:
                     `
                  <table class="table" style="text-align:left;">
                     <tr>
-                        <th>Do Something </th>
+                        <th>Môn học</th>
+                        <td>${info.module.name}</td>
+                    </tr>
+                    <tr>
+                        <th>Mã môn học</th>
+                        <td>${info.module.code}</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày thi</th>
                         <td>${info.day}</td>
                     </tr>
+                    <tr>
+                        <th>Bắt đầu</th>
+                        <td>${info.time_start}</td>
+                    <tr>
+                        <th>Kết thúc</th>
+                        <td>${info.time_finish}</td>
+                    </tr>
                      <tr>
-                        <th>Time create  </th>
+                        <th>Thời gian tạo </th>
                         <td>${info.created_at}</td>
                     </tr>
                 </table>

@@ -48,9 +48,10 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Name</th>
-                    <th>Time Start</th>
-                    <th>Time Finish</th>
+                    <th>Tên</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
 
@@ -95,7 +96,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Exam</h4>
+                    <h4 class="modal-title">Sửa kỳ thi</h4>
 
                 </div>
 
@@ -105,17 +106,17 @@
                         @csrf
                         {!! method_field('put') !!}
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Time Start</label>
+                            <label for="">Ngày bắt đầu</label>
                             <input type="date" class="form-control" name="time_start" required
                                    value="">
                         </div>
                         <div class="form-group">
-                            <label for="">Time Finish</label>
+                            <label for="">Ngày kết thúc</label>
                             <input type="date" class="form-control" name="time_finish" required
                                    value="">
                         </div>
@@ -138,7 +139,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Exam</h4>
+                    <h4 class="modal-title">Tạo kỳ thi</h4>
 
                 </div>
 
@@ -148,18 +149,18 @@
                         @csrf
 
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name"
-                                   placeholder="Enter name module" required value="">
+                                   placeholder="Nhập tên" required value="">
                         </div>
                         <div class="form-group">
-                            <label>Time Start</label>
-                            <input type="date" class="form-control" name="time_start" placeholder="Enter date"
+                            <label>Ngày bắt đầu</label>
+                            <input type="date" class="form-control" name="time_start" placeholder="Nhập ngày"
                                    required value="">
                         </div>
                         <div class="form-group">
-                            <label>Time Finish</label>
-                            <input type="date" class="form-control" name="time_finish" placeholder="Enter date"
+                            <label>Ngày kết thúc</label>
+                            <input type="date" class="form-control" name="time_finish" placeholder="Nhập ngày"
                                    required value="">
                         </div>
                     </div>
@@ -216,19 +217,19 @@
                     `
                  <table class="table" style="text-align:left;">
                     <tr>
-                        <th>Name  </th>
+                        <th>Tên  </th>
                         <td>${info.name}</td>
                     </tr>
                     <tr>
-                        <th>Time Start  </th>
+                        <th>Ngày bắt đầu </th>
                         <td>${info.time_start}</td>
                     </tr>
                     <tr>
-                        <th> Time Finish </th>
+                        <th> Ngày kết thúc </th>
                         <td>${info.time_finish}</td>
                     </tr>
                      <tr>
-                        <th>Time create  </th>
+                        <th>Thời gian tạo  </th>
                         <td>${info.created_at}</td>
                     </tr>
                 </table>

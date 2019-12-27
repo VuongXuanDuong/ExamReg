@@ -23,7 +23,7 @@
                 {{$studentCount}}
             </div>
             <div class="icon">
-                <i class="fas fa-graduation-cap"></i>
+                <i class=""></i>
             </div>
             <div style="clear:both;"></div>
             <div class="text">
@@ -35,24 +35,6 @@
         </div>
 
     </div>
-
-    <div class="panel">
-        <div class="panel-header" style="background-color:#3d95e0;">
-            <div class="number">
-                {{$teacherCount}}
-            </div>
-            <div class="icon">
-                <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <div style="clear:both;"></div>
-            <div class="text">
-                Giảng viên
-            </div>
-        </div>
-        <div class="panel-footer">
-            <a href="{{asset('admin/giang-vien')}}"> Xem thêm</a>
-        </div>
-    </div>
     <div class="panel">
         <div class="panel-header" style="background-color:#ff9400;">
             <div class="number">
@@ -63,7 +45,7 @@
             </div>
             <div style="clear:both;"></div>
             <div class="text">
-                University
+                Trường học
                 <br>
             </div>
         </div>

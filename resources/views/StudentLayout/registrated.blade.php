@@ -86,8 +86,15 @@
                         console.log(res);
                         this.reply = res.data;
                         if (this.reply == 'ok') {
-                            location.reload();
-                            alert("Bạn đã hủy ký thành công!");
+                            this.examShifts = [];
+                            this.modules = [];
+                            this.getAllExamShifts();
+                            swal({
+                                title: "Hủy thành công",
+                                type: "success",
+                                button: false,
+                                timer: 1500
+                            })
                         }
                     })
                 },
