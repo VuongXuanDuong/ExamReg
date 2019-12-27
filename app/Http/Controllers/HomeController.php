@@ -17,8 +17,6 @@ class HomeController extends Controller
 {
     //Admin Home
     public function index(){
-      //Count teacher accounts
-      $teacherCount = TeacherAccount::count();
       //Counting student accounts
       $studentCount = StudentAccount::count();
       //Counting room

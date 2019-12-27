@@ -42,26 +42,24 @@
                                     style="float:left;">
                             </button>
                         </form>
-                        <script>
-                            function choose() {
-                                document.getElementById("file").click();
-                            }
-                        </script>
                     </button>
-                    <button onclick="choose()" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success">
+                    <button onclick="choose2()" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success">
                         Nhập excel
                         <form method="POST" action="{{url('admin/module/list-student/import/'.$module->id)}}"
                               enctype="multipart/form-data">
                             @csrf
-                            <input style="display: none;" type="file" name="file" id="file"
-                                   onChange="document.getElementById('submitStudents').click()">
-                            <button style="display: none;" type="submit" id="submitStudents" class="btn btn-success"
+                            <input style="display: none;" type="file" name="file" id="file1"
+                                   onChange="document.getElementById('submitStudents2').click()">
+                            <button style="display: none;" type="submit" id="submitStudents2" class="btn btn-success"
                                     style="float:left;">
                             </button>
                         </form>
                         <script>
                             function choose() {
                                 document.getElementById("file").click();
+                            }
+                            function choose2() {
+                                document.getElementById("file1").click();
                             }
                         </script>
                     </button>

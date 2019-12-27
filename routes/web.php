@@ -27,6 +27,7 @@ Route::group(['prefix' => 'student', 'middleware' => 'student'], function () {
     Route::get('change','StudentLayoutController@changePass');
     Route::post('changePass','StudentLayoutController@postChangePass');
     Route::get('registrated','StudentLayoutController@registrated');
+    Route::get('print','StudentLayoutController@printed');
 
 });
 // Teacher

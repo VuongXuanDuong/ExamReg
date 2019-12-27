@@ -22,3 +22,4 @@ Route::post('/register-exam-sessions', 'StudentLayoutController@registerExamSess
 
 Route::get('/all-module-registrated/{userId}','StudentLayoutController@registerExamShift');
 Route::delete('/unregister/{examRoomUserId}','StudentLayoutController@unRegisterAShift');
+Route::get('/print/{userId}','StudentLayoutController@print');

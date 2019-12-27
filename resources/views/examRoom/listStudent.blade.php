@@ -68,7 +68,6 @@
         </tbody>
     </table>
 
-    <p style="font-size: 12pt; margin-top:15px;">Tổng số sinh viên đã đăng ký: 3 (sinh viên)</p>
     <table style="width: 100%; border: none; border-collapse: collapse; margin-top: 30px;">
         <tbody>
         <tr>
@@ -91,80 +90,4 @@
 </script>
 
 
-{{--    <div class="container-fluid full-width-container value-added-detail-page">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-9">--}}
-{{--                <h1 class="section-title" id="services">--}}
-{{--                    Danh sách sinh viên--}}
-{{--                </h1>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3">--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div>--}}
-{{--            @foreach( $students as $index => $student )--}}
-{{--                <h3>--}}
-{{--                    {{ $student['room']->name }}--}}
-{{--                    {{ $student['room']->area->name }}--}}
-{{--                    <br>--}}
-{{--                    {{ $student['exam_shift']->module->name }}--}}
-{{--                    - {{ $student['exam_shift']->module->code }}--}}
-{{--                </h3>--}}
-{{--                <h5>--}}
-{{--                    Day: {{ $student['exam_shift']->day }}--}}
-{{--                    <br>Time: {{ $student['exam_shift']->time_start }} - {{ $student['exam_shift']->time_finish }}--}}
-{{--                </h5>--}}
-{{--            @endforeach--}}
-{{--                <div class="pull-right pmd-card-body">--}}
-{{--                <button class="btn btn-success" data-toggle="modal" ><i--}}
-{{--                            class="fa fa-print fa-2x"></i></button>--}}
-{{--                </div>--}}
-{{--        </div>--}}
-{{--        <div class="table-responsive pmd-card pmd-z-depth">--}}
-{{--            <table class="table table-mc-red pmd-table">--}}
-{{--                <thead>--}}
-{{--                <td>STT</td>--}}
-{{--                <th>Họ và tên</th>--}}
-{{--                <th>Mã sinh viên</th>--}}
-{{--                <th>Email</th>--}}
-
-{{--                </thead>--}}
-{{--                <tbody>--}}
-{{--                @foreach( $students as $index => $student )--}}
-{{--                    @foreach($student['exam_room_user'] as $index => $user)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{$index+1}}</td>--}}
-{{--                            <td> {{ $user['user']->full_name }}</td>--}}
-{{--                            <td> {{ $user['user']->username }}</td>--}}
-{{--                            <td> {{ $user['user']->vnu_mail }}</td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
-{{--                @endforeach--}}
-{{--                </tbody>--}}
-{{--            </table>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <script type="text/javascript">--}}
-{{--        // Alert successful delete--}}
-{{--        @if(session('del-success'))--}}
-{{--        swal({--}}
-{{--            title: "Xóa thành công",--}}
-{{--            type: "success",--}}
-{{--            button: false,--}}
-{{--            timer: 1000--}}
-{{--        })--}}
-
-{{--        @endif--}}
-
-{{--        function loading() {--}}
-{{--            swal({--}}
-{{--                title: "Vui lòng đợi",--}}
-{{--                imageUrl: 'https://mbtskoudsalg.com/images/loading-gif-png-5.gif',--}}
-{{--                imageWidth: 150,--}}
-{{--                imageHeight: 150,--}}
-{{--                text: "Dữ liệu đang được xử lý",--}}
-{{--                showConfirmButton: false--}}
-{{--            })--}}
-{{--        }--}}
-{{--    </script>--}}
 

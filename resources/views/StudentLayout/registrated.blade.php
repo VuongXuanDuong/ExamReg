@@ -16,53 +16,59 @@
 
         @endif
     </script>
+    <div class="container-fluid full-width-container value-added-detail-page">
+        <h1 class="section-title" id="services">
+            <span>Danh sách môn thi đã đăng ký</span>
+        </h1>
+        <div class="">
+            <input type="hidden" name="" value="{{Auth::user()->id}}" ref="user">
+        </div>
+        <div class="pull-right pmd-card-body">
+            <a class="btn pmd-btn-raised pmd-ripple-effect btn-success" target="_blank" href="{{asset('student/print' )}}">
+                PRINT
+            </a>
+        </div>
 
-    <h1 class="title">
-        Danh sách môn thi đã đăng ký
-    </h1>
-    <div class="">
-        <input type="hidden" name="" value="{{Auth::user()->id}}" ref="user">
+        <div class="table-responsive pmd-card pmd-z-depth">
+            <table class="table table-mc-red pmd-table">
+
+                <th>STT</th>
+                <th>Môn học</th>
+                <th>Mã môn học</th>
+                <th>Thời gian</th>
+                <th>Phòng thi</th>
+                <th>Địa điểm</th>
+                <th>Hủy</th>
+
+
+                </thead>
+                <tbody>
+                <tr v-for="(examShift, index) in examShifts">
+                    <td>
+                        @{{index+1}}
+                    </td>
+                    <td>@{{examShift.module_name}}
+                    </td>
+                    <td>@{{examShift.module_code}}</td>
+                    <td>@{{examShift.day}}
+                        <br>@{{examShift.time_start}}-@{{examShift.time_finish}}
+                    </td>
+                    <td>
+                        @{{examShift.room}}
+                    </td>
+                    <td>@{{examShift.area}}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                                onclick="return confirm('Bạn có chắc chắn muốn hủy môn học này ?')"
+                                @click="deleteModule(examShift.examRoomUserId)"><i
+                                    class="fa fa-trash"></i></button>
+                    </td>
+                    <td>@{{examShift.examRoomId}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <table class="table">
-        <thead>
-
-        <th>STT</th>
-        <th>Môn học</th>
-        <th>Mã</th>
-        <th>Thời gian</th>
-        <th>Phòng thi</th>
-        <th>Địa điểm</th>
-        <th>Hủy</th>
-
-
-        </thead>
-        <tbody>
-        <tr v-for="(examShift, index) in examShifts">
-            <td>
-                hihi
-            </td>
-            <td>@{{examShift.module_name}}
-            </td>
-            <td>@{{examShift.module_code}}</td>
-            <td>@{{examShift.day}}
-                <br>@{{examShift.time_start}}-@{{examShift.time_finish}}
-            </td>
-            <td>
-                @{{examShift.room}}
-            </td>
-            <td>@{{examShift.area}}</td>
-            <td>
-                <button class="btn btn-danger"
-                        onclick="return confirm('Bạn có chắc chắn muốn hủy môn học này ?')"
-                        @click="deleteModule(examShift.examRoomUserId)"><i
-                            class="fa fa-trash"></i></button>
-            </td>
-            <td>@{{examShift.examRoomId}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <button  class="btn btn-success" @click="myFunction">Print</button>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script>
         new Vue({
@@ -79,7 +85,7 @@
             },
             methods: {
                 myFunction() {
-                  window.print();
+                    window.print();
                 },
                 deleteModule(examRoomUserId) {
                     axios.delete('/api/unregister/' + examRoomUserId).then(res => {

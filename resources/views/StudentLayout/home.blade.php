@@ -1,14 +1,12 @@
 @extends('StudentLayout.master')
 @section('content')
 
-
     <script type="text/javascript">
         // Session  login success
         @if(session('login-success'))
         swal({
             title: "Đăng nhập thành công",
             type: "success",
-            text: "<?php echo 'Chào mừng ' . $student['name'] . ' đến với hệ thống ExamReg' ?>",
             showConfirmButton: false,
             timer: 2500
         })
@@ -36,9 +34,9 @@
 
                 <th>Chọn</th>
                 <th>Trạng thái</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Ngày</th>
+                <th>Môn học</th>
+                <th>Mã môn học</th>
+                <th>Ngày thi</th>
                 <th>Bắt đầu</th>
                 <th>Kết thúc</th>
                 <th>Đã ĐK</th>
@@ -49,8 +47,8 @@
                 <tbody>
                 <tr v-for="(examShift, index) in examShifts">
                     <td>
-                        <i v-if="!examShift.isExamShiftRegisted || examShift.isRegisted" class="fas fa-check-circle"
-                           :class="{green: examShift.isRegisted}" @click="selectExamShift(examShift)"></i>
+                        <i v-if="!examShift.isExamShiftRegisted || examShift.isRegisted"
+                           :class="{green: examShift.isRegisted}" @click="selectExamShift(examShift)" class="fa fa-check-square"></i>
                     </td>
                     <td>
                         <i v-if="examShift.status">Đủ điều kiện thi</i>
@@ -79,10 +77,10 @@
             <table class="table table-mc-red pmd-table">
                 <thead>
 
-                <th>STT</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Ngày</th>
+                <th> </th>
+                <th>Môn học</th>
+                <th>Mã môn học</th>
+                <th>Ngày thi</th>
                 <th>Bắt đầu</th>
                 <th>Kết thúc</th>
 
@@ -90,7 +88,7 @@
                 <tbody>
                 <tr v-for="(examShift, index) in registedExamShifts">
                     <td>
-                        <i class="fas fa-check-circle" :class="{green: examShift.isRegisted}"
+                        <i class="fa fa-check-square" :class="{green: examShift.isRegisted}"
                            @click="selectExamShift(examShift)"></i>
                     </td>
                     <td>@{{examShift.module_name}}</td>
@@ -104,7 +102,7 @@
         </div>
     </div>
     <div class="pull-right pmd-card-body">
-        <button class="btn btn-success" name="button" @click="submit">Submit</button>
+        <button class="btn btn-success" name="button" @click="submit">Đăng ký</button>
     </div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
@@ -145,6 +143,7 @@
                 },
                 getAllExamShifts() {
                     axios.get('/api/all-modules/' + this.$refs.user.value).then(res => {
+                        console.log(res);
                         this.modules = res.data[0];
                         this.moduleRegisteds = res.data[1];
                         this.sites = res.data[2];
@@ -164,7 +163,6 @@
                                         examShift.isExamShiftRegisted = true;
                                     }
                                 })
-                                // console.log(examShift.exam_room);
                                 examShift.total = 0;
                                 examShift.exam_room.forEach(examRoom => {
                                     examShift.total += examRoom.room.total_computer;
@@ -177,7 +175,6 @@
                                         examShift.site = 0;
                                     }
                                 })
-                                console.log(examShift.site);
                                 this.examShifts.push(examShift);
                             })
 

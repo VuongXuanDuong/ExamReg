@@ -11,7 +11,7 @@
         
         <li class="dropdown pmd-dropdown"> 
             <a class="pmd-ripple-effect"  href="{{asset('admin/sinh-vien')}}">
-                <div class="media-left media-middle"><i class="fa fa-user-o"></i></div>
+                <div class="media-left media-middle"><i class="fa fa-users"></i></div>
                 <span class="media-body">Sinh Viên</span>
                 <div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
             </a> 

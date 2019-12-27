@@ -80,7 +80,7 @@ class StudentLayoutController extends Controller
         $idStudent = $student['id'];
         $examRooms = [];
         $selectedExamRoom = [];
-        foreach ( $shiftIds as $shiftId ) {
+        foreach ($shiftIds as $shiftId) {
             $examRooms = ExamRoom::where('exam_shift_id', $shiftId)->orderBy('exam_rooms.id', 'asc')
                 ->join('rooms', 'exam_rooms.room_id', 'rooms.id')
                 ->select('exam_rooms.id as id', 'rooms.total_computer as capacity')->get();
@@ -124,5 +124,19 @@ class StudentLayoutController extends Controller
         $id_student = $student['id'];
         $modules = ExamRoomUser::where('user_id', '=', $id_student)->with('exam_room.exam_shift.module')->with('exam_room.room.area')->get();
         return $modules;
+    }
+
+    public function printed()
+    {
+        return view('StudentLayout.print');
+    }
+
+    public function print($userId)
+    {
+        $studentCode = User::find($userId)->name;
+        $student = StudentAccount::where('username', '=', $studentCode)->first();
+        $id_student = $student['id'];
+        $modules = ExamRoomUser::where('user_id', '=', $id_student)->with('exam_room.exam_shift.module')->with('exam_room.room.area')->get();
+        return [$modules,$student];
     }
 }
